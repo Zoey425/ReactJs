@@ -17,32 +17,9 @@
 <script type="text/babel">
   const root = document.getElementById("root");
 
-  // function으로 사용하려면 return 해줘야한다.
-  function Title() {     
-    return (
-    <h3 id="title" onMouseEnter={() => console.log("mouse enter")}>Hello</h3>
-    );
-  };
-
-
-  // () => () arrow function
-  const Button = () => (
-    <button 
-      style={{background:"red"}}
-      onClick={() => console.log("I'm clicked")}>
-      Click me
-    </button>
-  );
-
-
-  const Container = () => (
-     <div>
-      <Title />
-      <Button />
-     </div>
-     );
-
-
+ 
+  
+ 
   // babel 사용 전(jsx)
   // const h3 = React.createElement("h3", {
   //   id: "title",
@@ -62,7 +39,57 @@
   // const container = React.createElement("div", null, [Title, Button]) 
   // babel 사용 전(jsx)
 
-  ReactDOM.render(<Container />, root);
+
+  ///////////////////////////////////////////////////////////////////////////
+
+
+  // // function으로 사용하려면 return 해줘야한다.
+  // function Title() {     
+  //   return (
+  //   <h3 id="title" onMouseEnter={() => console.log("mouse enter")}>Hello</h3>
+  //   );
+  // };
+
+
+  // // () => () arrow function
+  // const Button = () => (
+  //   <button 
+  //     style={{background:"red"}}
+  //     onClick={() => console.log("I'm clicked")}>
+  //     Click me
+  //   </button>
+  // );
+
+  
+
+    function App() {
+
+      const [counter, setCounter] = React.useState(0);
+      // useState는 default value(초기값) 설정가능
+      
+      const onClick = () => {
+      setCounter(counter + 1);
+      //  setCounter((current) => current + 1);
+      }
+
+      // state를 세팅하는 데는 2가지 방법이 있다.
+      // 1) 직접 할당 :setState(state +1)
+      // 2)함수를 할당:setState(state => state +1) (함수의 첫번째 인자는 현재 state 이다)
+
+      // 현재 state랑 관련이 없는 값을 새로운 state로 하고싶은 경우에는 (1),
+      // 현재 state에 조금의 변화를 주어서 새로운 state를 주고 싶은 경우에는 (2)
+
+      console.log(counter)
+      return (
+        <div>
+        <h3>Total Clicks: {counter}</h3>
+        <button onClick={onClick}>Click me</button>
+      </div>
+     )
+    }
+
+
+  ReactDOM.render(<App />, root);
   // container를 root안에 render
   // render : show it to users
   
