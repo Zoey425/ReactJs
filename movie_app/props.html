@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>React JS</title>
+  <script src="https://unpkg.com/react@17.0.2/umd/react.production.min.js"></script>
+  <script src="https://unpkg.com/react-dom@17.0.2/umd/react-dom.production.min.js"></script>
+  <!-- babel -->
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  
+</head>
+<body>
+  <div id="root"></div>
+</body>
+<script type="text/babel">
+
+    // function Btn(props){
+    //   console.log(props);
+    //   return <button
+    //   style={{
+    //     backgroundColor:"tomato",
+    //     padding:"10px 20px",
+    //     border:0,
+    //     borderRadius: 10,
+    //     color:"white",
+    //   }}>{props.name}</button>;
+    // }
+
+
+    function Btn({name}){
+      console.log({name});
+      return <button
+      style={{
+        backgroundColor:"tomato",
+        padding:"10px 20px",
+        border:0,
+        borderRadius: 10,
+        color:"white",
+        fontSize:10,
+      }}>{name}</button>;
+    }
+
+    function App() {
+      return (
+        <div>
+          <Btn name="버튼1" />
+          <Btn name="버튼2" />       
+        </div>
+     );
+    }
+
+  const root = document.getElementById("root");
+  ReactDOM.render(<App />, root);
+  
+</script>
+</html>
