@@ -1,5 +1,5 @@
 import DiaryEditor from "DiaryEditor";
-
+import "css/style.css";
 
 function App() {
   return (
