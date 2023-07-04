@@ -17,6 +17,8 @@ time, mark, audio, video {
 	font-size: 100%;
 	font: inherit;
 	vertical-align: baseline;
+  font-family: 'Noto Sans KR', 'Noto Sans';
+  font-weight: 300;
 }
 /* HTML5 display-role reset for older browsers */
 article, aside, details, figcaption, figure, 
@@ -45,16 +47,16 @@ table {
 
 /* ----------------------------------------------- */
 
-.DiaryEditor{
+.DiaryEditor, .DiaryList{
   margin:0 auto;
   text-align: center;
   padding: 30px;
-  font-family: 'Courier New', Courier, monospace;
 }
 
-.DiaryEditor h2{
+.DiaryEditor h2, .DiaryList h2{
   margin-bottom: 20px;
   font-weight: 700;
+  font-size: 1.3rem;
 }
 
 .DiaryEditor input, textarea, select, button{
@@ -83,4 +85,55 @@ table {
   padding: 15px;
   cursor: pointer;
   
+}
+
+
+/* DiaryItem ----------------------------------------------- */
+
+.DiaryList h5{
+  font-size: .8rem;
+  text-align: right;
+  color: #666;
+  margin-bottom: 20px;
+}
+
+
+.DiaryItem{
+  text-align: left;
+  background-color: rgb(240, 240, 240);
+  border-radius: 10px;
+  padding: 30px;
+  margin-bottom: 10px;
+}
+
+
+.info{
+  border-bottom: 1px solid #ddd;
+  margin-bottom: 15px;
+}
+
+.date{
+  opacity: .5;
+  font-size: .9rem;
+}
+
+.wrapEmotion{
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 15px;
+}
+
+.emotion{
+  margin-bottom: 30px;
+}
+.content{
+  font-weight: 500;
+  margin-bottom: 20px;
+}
+
+.DiaryItem button{
+  background-color: transparent;
+  border-radius: 5px;
+  padding: 5px 8px;
+  cursor: pointer;
 }
