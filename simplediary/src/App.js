@@ -1,13 +1,48 @@
 import DiaryEditor from "components/DiaryEditor";
 import DiaryList from "components/DiaryList";
 import "css/style.css";
-import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useReducer, useRef } from "react";
+
+
+const reducer = (state, action) => {
+  switch(action.type) {
+    case "INIT" : {
+      return action.data
+    }
+    case "CREATE" : {
+      const created_date = new Date().getTime();
+      const newItem = {
+        ...action.data,
+        created_date
+      }
+      return [newItem, ...state];
+    }
+    case "REMOVE" : {
+      return state.filter((it)=>it.id !== action.targetId);
+    }
+    case "EDIT" : {
+      return state.map(
+        (it)=> it.id === action.targetId ? 
+        {...it, content:action.newContent} : it
+      );
+    }
+      default :
+  }
+}
 
 
 function App() {
 
-  const [data, setData] = useState([]);
+  // const [data, setData] = useState([]);
+
+
+  //reducer
+  const [data, dispatch] = useReducer(reducer, []);
+
   const dataId = useRef(0);
+
+
+
 
   const getData = async() => {
    const res = await fetch('https://jsonplaceholder.typicode.com/comments')
@@ -22,8 +57,9 @@ function App() {
         id : dataId.current++,
       }
    });
+   
 
-   setData(initData);
+   dispatch({type:"INIT", data:initData});
   };
 
   useEffect(() => {
@@ -32,29 +68,20 @@ function App() {
 
   const onCreate = useCallback(
     (author, content, emotion) => {
-    const created_date = new Date().getTime();
-    const newItem = {
-      author,
-      content,
-      emotion,
-      created_date,
-      id : dataId.current
-   };
-   dataId.current += 1;
-   setData((data)=>[newItem, ...data]);
+     dispatch({type: 'CREATE', data:{ author, content, emotion, id : dataId.current}})
+     dataId.current += 1;
   }, []);
 
 
   const onRemove = useCallback((targetId) => {
       // 삭제 전달 받은걸 재 배열 후 전달
-      setData((data) => data.filter((it) => it.id !== targetId));
+      dispatch({type : 'REMOVE', targetId})
   }, []);
 
    //수정완료
    const onEdit = useCallback((targetId, newContent) => {
-    setData((data) =>
-      data.map((it) => it.id === targetId ? {...it, content: newContent} : it )
-    );
+
+    dispatch({type: 'EDIT', targetId, newContent})
   }, []);
 
 

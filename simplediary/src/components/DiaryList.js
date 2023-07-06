@@ -2,7 +2,6 @@ import DiaryItem from "./DiaryItem.js";
 
 const DiaryList = ({diaryList, onRemove, onEdit}) => {
 
-  // console.log(diaryList)
 
   return (
     <div className="DiaryList">
