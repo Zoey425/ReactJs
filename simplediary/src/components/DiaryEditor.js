@@ -1,6 +1,6 @@
-import React, { useState, useRef } from "react";
+import React, {  useState, useRef } from "react";
 
-const DiaryEditor = ({onCreate}) => {
+const DiaryEditor = ({ onCreate }) => {
 
 
   const authorInput = useRef();
@@ -47,6 +47,8 @@ const DiaryEditor = ({onCreate}) => {
      });
    };
 
+
+
   return (
   <div className="DiaryEditor">
       <h2>DIARY</h2>
@@ -82,7 +84,7 @@ const DiaryEditor = ({onCreate}) => {
       <button onClick={handleSubmit}>일기등록</button>
   </div>
   )
-}
+};
 
 
-export default DiaryEditor;
+export default React.memo(DiaryEditor);

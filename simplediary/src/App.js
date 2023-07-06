@@ -1,8 +1,7 @@
 import DiaryEditor from "components/DiaryEditor";
 import DiaryList from "components/DiaryList";
 import "css/style.css";
-import { useEffect, useMemo, useRef, useState } from "react";
-import OptimizeTest from "OptimizeTest"
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 
 
 function App() {
@@ -28,12 +27,11 @@ function App() {
   };
 
   useEffect(() => {
-    setTimeout(() => {
       getData();
-    }, 1500);
   }, []);
 
-  const onCreate = (author, content, emotion) => {
+  const onCreate = useCallback(
+    (author, content, emotion) => {
     const created_date = new Date().getTime();
     const newItem = {
       author,
@@ -43,22 +41,21 @@ function App() {
       id : dataId.current
    };
    dataId.current += 1;
-   setData([newItem, ...data]);
-  };
+   setData((data)=>[newItem, ...data]);
+  }, []);
 
 
-  const onRemove = (targetId) => {
+  const onRemove = useCallback((targetId) => {
       // 삭제 전달 받은걸 재 배열 후 전달
-      const newDiaryList = data.filter((it) => it.id !== targetId);
-      setData(newDiaryList);
-  };
+      setData(data => data.filter((it) => it.id !== targetId));
+  }, []);
 
    //수정완료
-   const onEdit = (targetId, newContent) => {
-    setData(
+   const onEdit = useCallback((targetId, newContent) => {
+    setData(data =>
       data.map((it) => it.id === targetId ? {...it, content: newContent} : it )
     );
-  };
+  }, []);
 
 
   const getDiaryAnalysis = useMemo(() => {
@@ -76,7 +73,6 @@ function App() {
 
   return (
     <div className="App">
-      <OptimizeTest /> 
       <DiaryEditor onCreate={onCreate}/>
 
         <div>전체일기 : {data.length}</div>
