@@ -47,12 +47,12 @@ function App() {
 
   const onRemove = useCallback((targetId) => {
       // 삭제 전달 받은걸 재 배열 후 전달
-      setData(data => data.filter((it) => it.id !== targetId));
+      setData((data) => data.filter((it) => it.id !== targetId));
   }, []);
 
    //수정완료
    const onEdit = useCallback((targetId, newContent) => {
-    setData(data =>
+    setData((data) =>
       data.map((it) => it.id === targetId ? {...it, content: newContent} : it )
     );
   }, []);
