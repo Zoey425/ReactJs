@@ -1,7 +1,10 @@
+import { useContext } from "react";
 import DiaryItem from "./DiaryItem.js";
+import { DiaryStateContext } from "App.js";
 
-const DiaryList = ({diaryList, onRemove, onEdit}) => {
+const DiaryList = () => {
 
+  const diaryList = useContext(DiaryStateContext);
 
   return (
     <div className="DiaryList">
@@ -10,7 +13,7 @@ const DiaryList = ({diaryList, onRemove, onEdit}) => {
       <div>
       {
           diaryList.map((it) => (
-           <DiaryItem key={it.id} {...it} onRemove={onRemove} onEdit={onEdit}/>
+           <DiaryItem key={it.id} {...it} />
            // 모든 데이터를 spread 연산자로 전달.
           ))
         }
